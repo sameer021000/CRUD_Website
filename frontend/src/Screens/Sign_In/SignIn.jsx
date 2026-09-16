@@ -85,7 +85,7 @@ const SignIn = () => {
           />
           
           <div className="auth-options">
-            <a href="#" className="forgot-link">Forgot password?</a>
+            <Link to="/forgot-password" className="forgot-link">Forgot password?</Link>
           </div>
 
           <SubmitButton isLoading={isLoading}>Sign In</SubmitButton>
