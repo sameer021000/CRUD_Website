@@ -1,0 +1,90 @@
+.custom-select-container {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select-box {
+  width: 100%;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 0.75rem;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.custom-select-box:hover {
+  border-color: var(--primary-blue);
+  background-color: rgba(37, 99, 235, 0.05);
+}
+
+.select-open {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 4px var(--primary-blue-glow);
+}
+
+.focused-label {
+  color: var(--primary-blue) !important;
+}
+
+.select-chevron {
+  color: var(--text-muted);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.select-open .select-chevron {
+  transform: rotate(180deg);
+  color: var(--primary-blue);
+}
+
+.select-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--primary-blue);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  z-index: 100;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(37, 99, 235, 0.2);
+  animation: dropdownFadeIn 0.2s ease-out;
+}
+
+.select-option {
+  padding: 1rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, padding-left 0.2s ease;
+}
+
+.select-option:hover {
+  background-color: rgba(37, 99, 235, 0.1);
+  padding-left: 1.5rem;
+  color: var(--primary-blue);
+}
+
+.option-active {
+  background-color: rgba(37, 99, 235, 0.2);
+  color: var(--primary-blue);
+  border-left: 4px solid var(--primary-blue);
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

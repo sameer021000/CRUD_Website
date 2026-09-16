@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { User, Phone, Mail } from 'lucide-react';
 import InputField from '../../Components/Input_Field/InputField';
 import SubmitButton from '../../Components/Submit_Button/SubmitButton';
+import CustomSelect from '../../Components/Custom_Select/CustomSelect';
 import SharedScreenDesign from '../../Components/Shared_Screen_Design/SharedScreenDesign';
 import { useFormLogic } from '../../Logic/FormLogic';
 
@@ -58,21 +59,19 @@ const ForgotPassword = () => {
       )}
       
       <form onSubmit={handleSubmit} className="auth-form" noValidate>
-        <div className="input-group">
-          <label className="input-label">Recovery Method</label>
-          <select 
-            className="custom-select"
-            value={formData.recoveryMethod}
-            onChange={(e) => {
-              updateField('recoveryMethod', e.target.value);
-              updateField('identifier', ''); // Clear input on method change
-            }}
-          >
-            <option value="username">Username</option>
-            <option value="email">Email</option>
-            <option value="phone">Phone Number</option>
-          </select>
-        </div>
+        <CustomSelect
+          label="Recovery Method"
+          options={[
+            { value: 'username', label: 'Username' },
+            { value: 'email', label: 'Email' },
+            { value: 'phone', label: 'Phone Number' }
+          ]}
+          value={formData.recoveryMethod}
+          onChange={(value) => {
+            updateField('recoveryMethod', value);
+            updateField('identifier', ''); // Clear input on method change
+          }}
+        />
 
         <InputField 
           label={formData.recoveryMethod.charAt(0).toUpperCase() + formData.recoveryMethod.slice(1)}

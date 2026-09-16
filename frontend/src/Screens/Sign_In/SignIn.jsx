@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { User, Lock, Phone, Mail } from 'lucide-react';
 import InputField from '../../Components/Input_Field/InputField';
 import SubmitButton from '../../Components/Submit_Button/SubmitButton';
+import CustomSelect from '../../Components/Custom_Select/CustomSelect';
 import SharedScreenDesign from '../../Components/Shared_Screen_Design/SharedScreenDesign';
 import { useFormLogic } from '../../Logic/FormLogic';
 import './SignIn.css';
@@ -69,21 +70,19 @@ const SignIn = () => {
       )}
       
       <form onSubmit={handleSubmit} className="auth-form" noValidate>
-        <div className="input-group">
-          <label className="input-label">Login Method</label>
-          <select 
-            className="custom-select"
-            value={formData.identifierType}
-            onChange={(e) => {
-              updateField('identifierType', e.target.value);
-              updateField('identifier', ''); // Clear field on change
-            }}
-          >
-            <option value="username">Username</option>
-            <option value="email">Email</option>
-            <option value="phone">Phone Number</option>
-          </select>
-        </div>
+        <CustomSelect
+          label="Login Method"
+          options={[
+            { value: 'username', label: 'Username' },
+            { value: 'email', label: 'Email' },
+            { value: 'phone', label: 'Phone Number' }
+          ]}
+          value={formData.identifierType}
+          onChange={(value) => {
+            updateField('identifierType', value);
+            updateField('identifier', ''); // Clear field on change
+          }}
+        />
 
         <InputField 
           label={formData.identifierType.charAt(0).toUpperCase() + formData.identifierType.slice(1)}
