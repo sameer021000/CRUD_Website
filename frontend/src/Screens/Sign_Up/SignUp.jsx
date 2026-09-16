@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { User, Mail, Phone, Lock, CheckCircle2, Circle } from 'lucide-react';
+import { User, Mail, Phone, Lock } from 'lucide-react';
 import InputField from '../../Components/Input_Field/InputField';
 import SubmitButton from '../../Components/Submit_Button/SubmitButton';
+import PasswordCriteria from '../../Components/Password_Criteria/PasswordCriteria';
 import SharedScreenDesign from '../../Components/Shared_Screen_Design/SharedScreenDesign';
 import { useFormLogic } from '../../Logic/FormLogic';
 import { emailRegex, usernameRegex, checkPasswordCriteria } from '../../Logic/ValidationRules';
@@ -70,13 +71,6 @@ const SignUp = () => {
     }, 1500);
   };
 
-  const CriterionItem = ({ met, text }) => (
-    <div className={`criterion-item ${met ? 'met' : ''}`}>
-      {met ? <CheckCircle2 size={16} /> : <Circle size={16} />}
-      <span>{text}</span>
-    </div>
-  );
-
   const footer = (
     <p>Already have an account? <Link to="/signin" className="auth-link">Sign In</Link></p>
   );
@@ -105,15 +99,7 @@ const SignUp = () => {
         
         <div className="password-section">
           <InputField label="Password" type="password" icon={Lock} value={formData.password} onChange={(e) => updateField('password', e.target.value)} placeholder="Create password" error={errors.password} isPassword defaultVisible={true} />
-          {formData.password && (
-            <div className="password-criteria-box">
-              <CriterionItem met={passwordCriteria.uppercase} text="Upper case letter" />
-              <CriterionItem met={passwordCriteria.lowercase} text="Lower case letter" />
-              <CriterionItem met={passwordCriteria.number} text="Numerical digit" />
-              <CriterionItem met={passwordCriteria.specialChar} text="Special character" />
-              <CriterionItem met={passwordCriteria.length} text="8 to 15 characters" />
-            </div>
-          )}
+          {formData.password && <PasswordCriteria criteria={passwordCriteria} />}
         </div>
 
         <InputField label="Confirm Password" type="password" icon={Lock} value={formData.confirmPassword} onChange={(e) => updateField('confirmPassword', e.target.value)} placeholder="Confirm password" error={errors.confirmPassword} isPassword defaultVisible={false} />
