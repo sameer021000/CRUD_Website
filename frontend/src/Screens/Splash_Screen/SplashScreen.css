@@ -1,0 +1,91 @@
+.splash-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(37, 99, 235, 0.1), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.1), transparent 25%);
+}
+
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 1s ease-out;
+}
+
+.icon-container {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(139, 92, 246, 0.2));
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.splash-icon {
+  color: var(--primary-blue);
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.splash-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.05em;
+}
+
+.splash-highlight {
+  color: transparent;
+  background: linear-gradient(135deg, var(--primary-blue), var(--accent-violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.splash-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.splash-loader {
+  margin-top: 3rem;
+  width: 200px;
+  height: 4px;
+  background-color: var(--bg-tertiary);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.splash-loader::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, var(--primary-blue), var(--accent-violet));
+  border-radius: 4px;
+  animation: slideLoad 2s infinite ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideLoad {
+  0% { left: -40%; }
+  100% { left: 100%; }
+}
