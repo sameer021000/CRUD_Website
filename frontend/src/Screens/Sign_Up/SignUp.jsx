@@ -86,6 +86,10 @@ const SignUp = () => {
       const usernameRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$/;
       if (!usernameRegex.test(formData.username)) {
         newErrors.username = "Username must be 8-15 chars with letters and numbers";
+      } else if (formData.username === formData.email) {
+        newErrors.username = "Username cannot be the same as your email";
+      } else if (formData.username === formData.phone) {
+        newErrors.username = "Username cannot be the same as your phone number";
       }
 
       // Password match
