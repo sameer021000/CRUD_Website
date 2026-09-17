@@ -1,0 +1,195 @@
+.dashboard-page {
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.05), transparent 60%);
+  padding-bottom: 2rem;
+}
+
+.dashboard-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+}
+
+.dashboard-nav h2 {
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+}
+
+.text-primary {
+  color: var(--primary-blue);
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 0.6rem 1.2rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.logout-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--error-color);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  transition: all 0.4s ease;
+}
+
+/* When a card is active, the grid switches to a 1-column layout taking full width */
+.bento-grid.has-active {
+  grid-template-columns: 1fr;
+}
+
+.sub-view {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+.sub-view h3 {
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.view-toggle {
+  display: flex;
+  background: var(--bg-tertiary);
+  border-radius: 0.75rem;
+  padding: 0.3rem;
+  border: 1px solid var(--border-color);
+}
+
+.view-toggle button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.view-toggle button.active {
+  background: var(--bg-secondary);
+  color: var(--primary-blue);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.view-toggle.danger button.active {
+  color: var(--error-color);
+}
+
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.mock-user-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text-secondary);
+  transition: all 0.3s;
+}
+
+.mock-user-card:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.divider {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin: 1rem 0;
+  position: relative;
+}
+
+.divider::before, .divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 25%;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+.warning-box {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.warning-box h3 {
+  color: var(--error-color);
+  margin-bottom: 1rem;
+}
+
+.warning-box p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.bg-danger {
+  background: linear-gradient(135deg, #ef4444, #b91c1c) !important;
+}
+
+.bg-danger:hover:not(:disabled) {
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4) !important;
+}
+
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-nav {
+    padding: 1rem;
+  }
+}

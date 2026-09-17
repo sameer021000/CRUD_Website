@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { User, Lock, Phone, Mail } from 'lucide-react';
 import InputField from '../../Components/Input_Field/InputField';
 import SubmitButton from '../../Components/Submit_Button/SubmitButton';
@@ -14,6 +14,8 @@ const SignIn = () => {
     identifier: '',
     password: ''
   });
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,7 +40,8 @@ const SignIn = () => {
     setTimeout(() => {
       setIsLoading(false);
       setFormStatus({ type: 'success', message: 'Signed in successfully! Redirecting...' });
-    }, 1500);
+      setTimeout(() => navigate('/dashboard'), 1000);
+    }, 1000);
   };
 
   const getIcon = () => {
