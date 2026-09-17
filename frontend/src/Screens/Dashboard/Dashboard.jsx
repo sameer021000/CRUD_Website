@@ -22,11 +22,17 @@ const Dashboard = () => {
   // Get Search state
   const [getSearchType, setGetSearchType] = useState('username');
   const [getSearchTerm, setGetSearchTerm] = useState('');
+  const [getSearchError, setGetSearchError] = useState('');
   const [fetchedUser, setFetchedUser] = useState(null);
 
   const handleFetchUser = (e) => {
     e.preventDefault();
-    if (!getSearchTerm) return;
+    if (!getSearchTerm) {
+      setGetSearchError("This field is required");
+      setFetchedUser(null);
+      return;
+    }
+    setGetSearchError('');
     
     // Mock user response
     setFetchedUser({
@@ -69,6 +75,7 @@ const Dashboard = () => {
             onChange={(val) => {
               setGetSearchType(val);
               setGetSearchTerm('');
+              setGetSearchError('');
               setFetchedUser(null);
             }}
           />
@@ -77,9 +84,13 @@ const Dashboard = () => {
             type={getSearchType === 'email' ? 'email' : getSearchType === 'phone' ? 'tel' : 'text'}
             icon={getSearchType === 'email' ? Mail : getSearchType === 'phone' ? Phone : User}
             value={getSearchTerm}
-            onChange={(e) => setGetSearchTerm(e.target.value)}
+            onChange={(e) => {
+              setGetSearchTerm(e.target.value);
+              setGetSearchError('');
+            }}
             placeholder={`Enter ${getSearchType}`}
             prefix={getSearchType === 'phone' ? '+91' : undefined}
+            error={getSearchError}
           />
           <SubmitButton className="mt-2">Fetch User</SubmitButton>
 
