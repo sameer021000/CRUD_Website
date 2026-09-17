@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { User, Mail, Phone, Lock } from 'lucide-react';
+import axios from 'axios';
 import InputField from '../../Components/Input_Field/InputField';
 import SubmitButton from '../../Components/Submit_Button/SubmitButton';
 import PasswordCriteria from '../../Components/Password_Criteria/PasswordCriteria';
@@ -10,6 +11,7 @@ import { emailRegex, usernameRegex, checkPasswordCriteria, validateRequiredField
 import './SignUp.css';
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const { formData, errors, formStatus, isLoading, updateField, setErrors, setFormStatus, setIsLoading, clearStatus } = useFormLogic({
     firstName: '',
     lastName: '',
@@ -28,9 +30,11 @@ const SignUp = () => {
     setPasswordCriteria(checkPasswordCriteria(formData.password));
   }, [formData.password]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     clearStatus();
+    
+    // 1. Local Form Validation
     const { newErrors, hasEmptyFields } = validateRequiredFields(formData, [
       'firstName', 'lastName', 'email', 'phone', 'username', 'password', 'confirmPassword'
     ]);
@@ -57,11 +61,40 @@ const SignUp = () => {
       return;
     }
 
+    // 2. Prepare payload matching the Backend PascalCase schema
+    const payload = {
+        FirstName: formData.firstName,
+        LastName: formData.lastName,
+        Email: formData.email,
+        Phone: formData.phone,
+        Username: formData.username,
+        Password: formData.password
+    };
+
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      setFormStatus({ type: 'success', message: 'Account created successfully! Redirecting...' });
-    }, 1500);
+
+    try {
+        // 3. API Request to Render Backend
+        const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+        await axios.post(`${API_URL}/api/SignUp`, payload);
+
+        setIsLoading(false);
+        setFormStatus({ type: 'success', message: 'Account created successfully! Redirecting...' });
+        
+        // 4. Redirect to Sign In on Success
+        setTimeout(() => {
+            navigate('/signin');
+        }, 2000);
+
+    } catch (error) {
+        setIsLoading(false);
+        // Catch 400/409 Uniqueness validation errors explicitly sent by the backend
+        if (error.response && error.response.data && error.response.data.message) {
+            setFormStatus({ type: 'error', message: error.response.data.message });
+        } else {
+            setFormStatus({ type: 'error', message: 'Failed to connect to the server. Please try again later.' });
+        }
+    }
   };
 
   const footer = (
