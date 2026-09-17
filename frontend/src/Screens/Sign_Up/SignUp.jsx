@@ -75,7 +75,8 @@ const SignUp = () => {
 
     try {
         // 3. API Request to Render Backend
-        const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+        // Explicitly hardcoding the Render URL to bypass Webpack .env parsing issues
+        const API_URL = 'https://crud-website-backend.onrender.com';
         await axios.post(`${API_URL}/api/SignUp`, payload);
 
         setIsLoading(false);
