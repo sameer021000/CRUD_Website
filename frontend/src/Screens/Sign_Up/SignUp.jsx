@@ -75,6 +75,7 @@ const SignUp = () => {
 
     try {
         // 3. API Request to Render Backend
+        console.log("REACT_APP_API_URL evaluates to:", process.env.REACT_APP_API_URL);
         const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
         await axios.post(`${API_URL}/api/SignUp`, payload);
 
