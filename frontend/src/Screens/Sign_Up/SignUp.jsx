@@ -88,6 +88,8 @@ const SignUp = () => {
 
     } catch (error) {
         setIsLoading(false);
+        console.error("Signup API Error:", error);
+        
         // Catch 400/409 Uniqueness validation errors explicitly sent by the backend
         if (error.response && error.response.data && error.response.data.message) {
             setFormStatus({ type: 'error', message: error.response.data.message });
