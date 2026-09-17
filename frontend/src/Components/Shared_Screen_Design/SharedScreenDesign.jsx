@@ -10,13 +10,13 @@ const SharedScreenDesign = ({ title, subtitle, children, footer, customClass = '
           {subtitle && <p>{subtitle}</p>}
         </div>
         
+        {children}
+
         {formStatus.message && (
           <div className={`status-message ${formStatus.type}`}>
             {formStatus.message}
           </div>
         )}
-
-        {children}
 
         {footer && (
           <div className="auth-footer">

@@ -12,6 +12,7 @@ import './SignUp.css';
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const [isRedirecting, setIsRedirecting] = useState(false);
   const { formData, errors, formStatus, isLoading, updateField, setErrors, setFormStatus, setIsLoading, clearStatus } = useFormLogic({
     firstName: '',
     lastName: '',
@@ -79,6 +80,7 @@ const SignUp = () => {
         await axios.post(`${API_URL}/api/SignUp`, payload);
 
         setIsLoading(false);
+        setIsRedirecting(true);
         setFormStatus({ type: 'success', message: 'Account created successfully! Redirecting...' });
         
         // 4. Redirect to Sign In on Success
@@ -88,8 +90,6 @@ const SignUp = () => {
 
     } catch (error) {
         setIsLoading(false);
-        console.error("Signup API Error:", error);
-        
         // Catch 400/409 Uniqueness validation errors explicitly sent by the backend
         if (error.response && error.response.data && error.response.data.message) {
             setFormStatus({ type: 'error', message: error.response.data.message });
@@ -105,31 +105,36 @@ const SignUp = () => {
 
   return (
     <SharedScreenDesign 
-      title="Create Account" 
-      subtitle="Join CRUDMaster today"
-      footer={footer}
+      title={isRedirecting ? "Welcome Aboard!" : "Create Account"} 
+      subtitle={isRedirecting ? "Setting up your workspace..." : "Join CRUDMaster today"}
+      footer={!isRedirecting && footer}
       customClass="signup-page"
       formStatus={formStatus}
     >
 
-
-      <form onSubmit={handleSubmit} className="auth-form" noValidate>
-        <div className="form-row">
-          <InputField label="First Name" type="text" value={formData.firstName} onChange={(e) => updateField('firstName', e.target.value)} placeholder="First Name" error={errors.firstName} />
-          <InputField label="Last Name" type="text" value={formData.lastName} onChange={(e) => updateField('lastName', e.target.value)} placeholder="Last Name" error={errors.lastName} />
+      {isRedirecting ? (
+        <div className="redirecting-container">
+          <div className="theme-spinner"></div>
         </div>
-        <InputField label="Email" type="email" icon={Mail} value={formData.email} onChange={(e) => updateField('email', e.target.value)} placeholder="Mail ID" error={errors.email} />
-        <InputField label="Phone Number" type="tel" icon={Phone} prefix="+91" value={formData.phone} onChange={(e) => updateField('phone', e.target.value)} placeholder="Phone Number" error={errors.phone} />
-        <InputField label="Username" type="text" icon={User} value={formData.username} onChange={(e) => updateField('username', e.target.value)} placeholder="Choose a username" error={errors.username} />
-        
-        <div className="password-section">
-          <InputField label="Password" type="password" icon={Lock} value={formData.password} onChange={(e) => updateField('password', e.target.value)} placeholder="Create password" error={errors.password} isPassword defaultVisible={true} />
-          {formData.password && <PasswordCriteria criteria={passwordCriteria} />}
-        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="auth-form" noValidate>
+          <div className="form-row">
+            <InputField label="First Name" type="text" value={formData.firstName} onChange={(e) => updateField('firstName', e.target.value)} placeholder="First Name" error={errors.firstName} />
+            <InputField label="Last Name" type="text" value={formData.lastName} onChange={(e) => updateField('lastName', e.target.value)} placeholder="Last Name" error={errors.lastName} />
+          </div>
+          <InputField label="Email" type="email" icon={Mail} value={formData.email} onChange={(e) => updateField('email', e.target.value)} placeholder="Mail ID" error={errors.email} />
+          <InputField label="Phone Number" type="tel" icon={Phone} prefix="+91" value={formData.phone} onChange={(e) => updateField('phone', e.target.value)} placeholder="Phone Number" error={errors.phone} />
+          <InputField label="Username" type="text" icon={User} value={formData.username} onChange={(e) => updateField('username', e.target.value)} placeholder="Choose a username" error={errors.username} />
+          
+          <div className="password-section">
+            <InputField label="Password" type="password" icon={Lock} value={formData.password} onChange={(e) => updateField('password', e.target.value)} placeholder="Create password" error={errors.password} isPassword defaultVisible={true} />
+            {formData.password && <PasswordCriteria criteria={passwordCriteria} />}
+          </div>
 
-        <InputField label="Confirm Password" type="password" icon={Lock} value={formData.confirmPassword} onChange={(e) => updateField('confirmPassword', e.target.value)} placeholder="Confirm password" error={errors.confirmPassword} isPassword defaultVisible={false} />
-        <SubmitButton isLoading={isLoading} className="mt-4">Sign Up</SubmitButton>
-      </form>
+          <InputField label="Confirm Password" type="password" icon={Lock} value={formData.confirmPassword} onChange={(e) => updateField('confirmPassword', e.target.value)} placeholder="Confirm password" error={errors.confirmPassword} isPassword defaultVisible={false} />
+          <SubmitButton isLoading={isLoading} className="mt-4">Sign Up</SubmitButton>
+        </form>
+      )}
     </SharedScreenDesign>
   );
 };
