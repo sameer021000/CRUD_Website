@@ -48,9 +48,9 @@ const SignIn = () => {
   };
 
   const getPlaceholder = () => {
-    if (formData.identifierType === 'email') return 'Enter your email';
-    if (formData.identifierType === 'phone') return 'Enter your phone number';
-    return 'Enter your username';
+    if (formData.identifierType === 'email') return 'Email address';
+    if (formData.identifierType === 'phone') return 'Phone number';
+    return 'Username';
   };
 
   const footer = (

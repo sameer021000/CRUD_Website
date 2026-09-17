@@ -37,9 +37,9 @@ const ForgotPassword = () => {
   };
 
   const getPlaceholder = () => {
-    if (formData.recoveryMethod === 'email') return 'Enter your email address';
-    if (formData.recoveryMethod === 'phone') return 'Enter your phone number';
-    return 'Enter your username';
+    if (formData.recoveryMethod === 'email') return 'Email address';
+    if (formData.recoveryMethod === 'phone') return 'Phone number';
+    return 'Username';
   };
 
   const footer = (
