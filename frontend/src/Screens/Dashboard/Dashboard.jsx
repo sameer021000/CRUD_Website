@@ -16,7 +16,6 @@ const Dashboard = () => {
   const [deleteView, setDeleteView] = useState('specific'); // 'specific' | 'all'
 
   // Generic form state for demo
-  const [searchTerm, setSearchTerm] = useState('');
   const [confirmDelete, setConfirmDelete] = useState('');
 
   // Get Search state
