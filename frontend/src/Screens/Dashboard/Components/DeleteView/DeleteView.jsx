@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Search } from 'lucide-react';
-import InputField from '../Input_Field/InputField';
-import SubmitButton from '../Submit_Button/SubmitButton';
+import InputField from '../../../../Components/Input_Field/InputField';
+import SubmitButton from '../../../../Components/Submit_Button/SubmitButton';
+import './DeleteView.css';
 
 const DeleteView = () => {
   const [deleteView, setDeleteView] = useState('specific'); // 'specific' | 'all'

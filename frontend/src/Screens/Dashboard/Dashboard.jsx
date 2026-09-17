@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, PlusCircle, Edit3, Trash2, LogOut } from 'lucide-react';
 import BentoCard from '../../Components/Bento_Card/BentoCard';
-import GetView from '../../Components/Dashboard_Views/GetView';
-import PostView from '../../Components/Dashboard_Views/PostView';
-import PatchView from '../../Components/Dashboard_Views/PatchView';
-import DeleteView from '../../Components/Dashboard_Views/DeleteView';
+import GetView from './Components/GetView/GetView';
+import PostView from './Components/PostView/PostView';
+import PatchView from './Components/PatchView/PatchView';
+import DeleteView from './Components/DeleteView/DeleteView';
 import './Dashboard.css';
 
 const Dashboard = () => {

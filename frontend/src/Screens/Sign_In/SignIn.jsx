@@ -7,7 +7,6 @@ import CustomSelect from '../../Components/Custom_Select/CustomSelect';
 import SharedScreenDesign from '../../Components/Shared_Screen_Design/SharedScreenDesign';
 import { useFormLogic } from '../../Logic/FormLogic';
 import { validateRequiredFields } from '../../Logic/ValidationRules';
-import './SignIn.css';
 
 const SignIn = () => {
   const { formData, errors, formStatus, isLoading, updateField, setErrors, setFormStatus, setIsLoading, clearStatus } = useFormLogic({

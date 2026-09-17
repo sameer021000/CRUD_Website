@@ -1,0 +1,25 @@
+.warning-box {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.warning-box h3 {
+  color: var(--error-color);
+  margin-bottom: 1rem;
+}
+
+.warning-box p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.bg-danger {
+  background: linear-gradient(135deg, #ef4444, #b91c1c) !important;
+}
+
+.bg-danger:hover:not(:disabled) {
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4) !important;
+}

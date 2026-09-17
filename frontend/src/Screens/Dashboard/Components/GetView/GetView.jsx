@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Users, User, Mail, Phone } from 'lucide-react';
-import InputField from '../Input_Field/InputField';
-import SubmitButton from '../Submit_Button/SubmitButton';
-import CustomSelect from '../Custom_Select/CustomSelect';
+import { Search, Users, User, Mail, Phone } from 'lucide-react';
+import InputField from '../../../../Components/Input_Field/InputField';
+import SubmitButton from '../../../../Components/Submit_Button/SubmitButton';
+import CustomSelect from '../../../../Components/Custom_Select/CustomSelect';
+import './GetView.css';
 
 const GetView = () => {
   const [getView, setGetView] = useState('all'); // 'all' | 'search'

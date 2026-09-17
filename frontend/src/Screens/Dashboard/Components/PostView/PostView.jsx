@@ -1,6 +1,7 @@
 import React from 'react';
-import InputField from '../Input_Field/InputField';
-import SubmitButton from '../Submit_Button/SubmitButton';
+import InputField from '../../../../Components/Input_Field/InputField';
+import SubmitButton from '../../../../Components/Submit_Button/SubmitButton';
+import './PostView.css';
 
 const PostView = () => {
   return (
