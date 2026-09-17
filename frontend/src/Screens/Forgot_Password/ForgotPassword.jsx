@@ -6,6 +6,7 @@ import SubmitButton from '../../Components/Submit_Button/SubmitButton';
 import CustomSelect from '../../Components/Custom_Select/CustomSelect';
 import SharedScreenDesign from '../../Components/Shared_Screen_Design/SharedScreenDesign';
 import { useFormLogic } from '../../Logic/FormLogic';
+import { validateRequiredFields } from '../../Logic/ValidationRules';
 
 const ForgotPassword = () => {
   const { formData, errors, formStatus, isLoading, updateField, setErrors, setFormStatus, setIsLoading, clearStatus } = useFormLogic({
@@ -17,8 +18,9 @@ const ForgotPassword = () => {
     e.preventDefault();
     clearStatus();
 
-    if (!formData.identifier) {
-      setErrors({ identifier: "This field is required to reset your password" });
+    const { newErrors, hasEmptyFields } = validateRequiredFields(formData, ['identifier']);
+    if (hasEmptyFields) {
+      setErrors(newErrors);
       setFormStatus({ type: 'error', message: 'Please provide your account details.' });
       return;
     }
@@ -49,14 +51,11 @@ const ForgotPassword = () => {
   return (
     <SharedScreenDesign 
       title="Reset Password" 
-      subtitle="Choose a method to recover your account"
+      subtitle="Enter your details to receive a recovery link"
       footer={footer}
+      formStatus={formStatus}
     >
-      {formStatus.message && (
-        <div className={`status-message ${formStatus.type}`}>
-          {formStatus.message}
-        </div>
-      )}
+
       
       <form onSubmit={handleSubmit} className="auth-form" noValidate>
         <CustomSelect

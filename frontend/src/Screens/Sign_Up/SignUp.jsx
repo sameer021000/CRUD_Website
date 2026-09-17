@@ -6,7 +6,7 @@ import SubmitButton from '../../Components/Submit_Button/SubmitButton';
 import PasswordCriteria from '../../Components/Password_Criteria/PasswordCriteria';
 import SharedScreenDesign from '../../Components/Shared_Screen_Design/SharedScreenDesign';
 import { useFormLogic } from '../../Logic/FormLogic';
-import { emailRegex, usernameRegex, checkPasswordCriteria } from '../../Logic/ValidationRules';
+import { emailRegex, usernameRegex, checkPasswordCriteria, validateRequiredFields } from '../../Logic/ValidationRules';
 import './SignUp.css';
 
 const SignUp = () => {
@@ -31,16 +31,9 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     clearStatus();
-    const newErrors = {};
-
-    const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'username', 'password', 'confirmPassword'];
-    let hasEmptyFields = false;
-    requiredFields.forEach(field => {
-      if (!formData[field]) {
-        newErrors[field] = "This field is required";
-        hasEmptyFields = true;
-      }
-    });
+    const { newErrors, hasEmptyFields } = validateRequiredFields(formData, [
+      'firstName', 'lastName', 'email', 'phone', 'username', 'password', 'confirmPassword'
+    ]);
 
     if (!hasEmptyFields) {
       if (!emailRegex.test(formData.email)) newErrors.email = "Please enter a valid email address";
@@ -81,12 +74,9 @@ const SignUp = () => {
       subtitle="Join CRUDMaster today"
       footer={footer}
       customClass="signup-page"
+      formStatus={formStatus}
     >
-      {formStatus.message && (
-        <div className={`status-message ${formStatus.type}`}>
-          {formStatus.message}
-        </div>
-      )}
+
 
       <form onSubmit={handleSubmit} className="auth-form" noValidate>
         <div className="form-row">

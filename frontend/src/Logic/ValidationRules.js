@@ -14,3 +14,15 @@ export const checkPasswordCriteria = (pwd) => {
 export const formatPhoneNumber = (value) => {
   return value.replace(/\D/g, '').slice(0, 10);
 };
+
+export const validateRequiredFields = (formData, requiredFields) => {
+  const newErrors = {};
+  let hasEmptyFields = false;
+  requiredFields.forEach(field => {
+    if (!formData[field]) {
+      newErrors[field] = "This field is required";
+      hasEmptyFields = true;
+    }
+  });
+  return { newErrors, hasEmptyFields };
+};

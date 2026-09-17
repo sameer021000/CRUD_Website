@@ -6,6 +6,7 @@ import SubmitButton from '../../Components/Submit_Button/SubmitButton';
 import CustomSelect from '../../Components/Custom_Select/CustomSelect';
 import SharedScreenDesign from '../../Components/Shared_Screen_Design/SharedScreenDesign';
 import { useFormLogic } from '../../Logic/FormLogic';
+import { validateRequiredFields } from '../../Logic/ValidationRules';
 import './SignIn.css';
 
 const SignIn = () => {
@@ -20,15 +21,7 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     clearStatus();
-    const newErrors = {};
-
-    let hasEmptyFields = false;
-    ['identifier', 'password'].forEach(field => {
-      if (!formData[field]) {
-        newErrors[field] = "This field is required";
-        hasEmptyFields = true;
-      }
-    });
+    const { newErrors, hasEmptyFields } = validateRequiredFields(formData, ['identifier', 'password']);
 
     if (hasEmptyFields) {
       setErrors(newErrors);
@@ -63,14 +56,11 @@ const SignIn = () => {
   return (
     <SharedScreenDesign 
       title="Welcome Back" 
-      subtitle="Sign in to continue to CRUDMaster"
+      subtitle="Sign in to CRUDMaster"
       footer={footer}
+      formStatus={formStatus}
     >
-      {formStatus.message && (
-        <div className={`status-message ${formStatus.type}`}>
-          {formStatus.message}
-        </div>
-      )}
+
       
       <form onSubmit={handleSubmit} className="auth-form" noValidate>
         <CustomSelect

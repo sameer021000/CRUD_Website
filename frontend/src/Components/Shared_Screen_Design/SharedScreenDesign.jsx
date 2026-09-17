@@ -1,7 +1,7 @@
 import React from 'react';
 import './SharedScreenDesign.css';
 
-const SharedScreenDesign = ({ title, subtitle, children, footer, customClass = '' }) => {
+const SharedScreenDesign = ({ title, subtitle, children, footer, customClass = '', formStatus = {} }) => {
   return (
     <div className={`auth-page ${customClass}`}>
       <div className="auth-card">
@@ -10,6 +10,12 @@ const SharedScreenDesign = ({ title, subtitle, children, footer, customClass = '
           {subtitle && <p>{subtitle}</p>}
         </div>
         
+        {formStatus.message && (
+          <div className={`status-message ${formStatus.type}`}>
+            {formStatus.message}
+          </div>
+        )}
+
         {children}
 
         {footer && (
