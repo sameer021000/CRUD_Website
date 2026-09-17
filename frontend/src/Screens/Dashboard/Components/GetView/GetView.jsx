@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Users, User, Mail, Phone } from 'lucide-react';
+import { Users, User, Mail, Phone } from 'lucide-react';
 import InputField from '../../../../Components/Input_Field/InputField';
 import SubmitButton from '../../../../Components/Submit_Button/SubmitButton';
 import CustomSelect from '../../../../Components/Custom_Select/CustomSelect';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, PlusCircle, Edit3, Trash2, LogOut } from 'lucide-react';
-import BentoCard from '../../Components/Bento_Card/BentoCard';
+import BentoCard from './Components/BentoCard/BentoCard';
 import GetView from './Components/GetView/GetView';
 import PostView from './Components/PostView/PostView';
 import PatchView from './Components/PatchView/PatchView';
